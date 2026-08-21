@@ -49,7 +49,7 @@ async def ingest_webhook(
         async with db.begin():
             result = await db.execute(
                 text(
-                    "SELECT 1 FROM scheduled_recoveries WHERE event_id = :event_id LIMIT 1"
+                    "SELECT 1 FROM slancio_scheduled_recovery WHERE event_id = :event_id LIMIT 1"
                 ),
                 {"event_id": payload.event_id},
             )
@@ -110,7 +110,7 @@ async def _enqueue_to_qstash(payload: WebhookIngestPayload, db: AsyncSession):
         async with db.begin():
             result = await db.execute(
                 text(
-                    "SELECT 1 FROM scheduled_recoveries WHERE event_id = :event_id LIMIT 1"
+                    "SELECT 1 FROM slancio_scheduled_recovery WHERE event_id = :event_id LIMIT 1"
                 ),
                 {"event_id": payload.event_id},
             )

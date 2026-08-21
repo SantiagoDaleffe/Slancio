@@ -84,5 +84,5 @@ resource "railway_variable" "public_api_url" {
   service_id     = railway_service.slancio_api.id
   environment_id = railway_project.fuccina_project.default_environment.id
   name           = "PUBLIC_API_URL"
-  value          = "https://${railway_service.slancio_api.name}-production.up.railway.app" 
+  value          = "https://${railway_service.slancio_api.name}.up.railway.app" 
 }

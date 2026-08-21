@@ -72,7 +72,7 @@ async def process_event(request: Request, db: AsyncSession = Depends(get_db)):
         async with db.begin():
             result = await db.execute(
                 text(
-                    "SELECT margin_rules FROM tenant_configs WHERE tenant_id = :tenant_id AND is_active = true"
+                    "SELECT margin_rules FROM slancio_tenant_configs WHERE tenant_id = :tenant_id AND is_active = true"
                 ),
                 {"tenant_id": tenant_id},
             )
@@ -126,7 +126,7 @@ async def process_event(request: Request, db: AsyncSession = Depends(get_db)):
             async with db.begin():
                 await db.execute(
                     text("""
-                        INSERT INTO scheduled_recoveries (id, tenant_id, event_id, execute_at, payment_data, status, created_at)
+                        INSERT INTO slancio_scheduled_recovery (id, tenant_id, event_id, execute_at, payment_data, status, created_at)
                         VALUES (:id, :tenant_id, :event_id, :execute_at, CAST(:payment_data AS JSON), :status, NOW())
                     """),
                     {

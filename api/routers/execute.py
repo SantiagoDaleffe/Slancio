@@ -79,7 +79,7 @@ async def execute_recovery(request: Request, db: AsyncSession = Depends(get_db))
         async with db.begin():
             result = await db.execute(
                 text(
-                    "SELECT payment_data FROM scheduled_recoveries WHERE event_id = :event_id AND status = 'PENDING'"
+                    "SELECT payment_data FROM slancio_scheduled_recovery WHERE event_id = :event_id AND status = 'PENDING'"
                 ),
                 {"event_id": event_id},
             )
@@ -129,7 +129,7 @@ async def execute_recovery(request: Request, db: AsyncSession = Depends(get_db))
 
             await db.execute(
                 text("""
-                    UPDATE scheduled_recoveries 
+                    UPDATE slancio_scheduled_recovery 
                     SET status = :status, payment_data = '{}'::jsonb 
                     WHERE event_id = :event_id
                 """),
