@@ -1,18 +1,16 @@
-# 1. El "Paraguas" corporativo
 resource "railway_project" "fuccina_project" {
   name        = "fuccina"
   description = "Fuccina Software Suite"
 }
 
-# 2. El Servicio (Contenedor) de Slancio
 resource "railway_service" "slancio_api" {
-  project_id        = railway_project.fuccina_project.id
-  name              = "slancio"
-  source_repo       = var.github_repo
-  sleep_application = true
+    project_id        = railway_project.fuccina_project.id
+      name              = "slancio"
+        source_repo       = var.github_repo
+          sleep_application = true
+}
 }
 
-# 3. Inyección de Variables para Slancio
 resource "railway_variable" "db_url" {
   service_id     = railway_service.slancio_api.id
   environment_id = railway_project.fuccina_project.default_environment.id
