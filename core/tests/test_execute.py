@@ -39,7 +39,7 @@ async def test_execute_recovery_success_and_masks_data(mock_receiver):
     query_text = str(call_args[0])
     
     assert "payment_data = '{}'::jsonb" in query_text
-    assert "UPDATE scheduled_recoveries" in query_text
+    assert "UPDATE slancio_scheduled_recovery" in query_text
 
 @pytest.mark.asyncio
 @patch("api.routers.execute.qstash_receiver")
