@@ -7,8 +7,6 @@ resource "railway_service" "slancio_api" {
     project_id        = railway_project.fuccina_project.id
       name              = "slancio"
         source_repo       = var.github_repo
-          sleep_application = true
-}
 }
 
 resource "railway_variable" "db_url" {
