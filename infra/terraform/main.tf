@@ -79,7 +79,6 @@ resource "railway_variable" "qstash_next_key" {
   value          = var.qstash_next_signing_key
 }
 
-# La URL pública generada dinámicamente
 resource "railway_variable" "public_api_url" {
   service_id     = railway_service.slancio_api.id
   environment_id = railway_project.fuccina_project.default_environment.id

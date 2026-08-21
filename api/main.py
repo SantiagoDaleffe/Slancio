@@ -30,8 +30,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Slancio", # <-- Cambiamos el nombre
-    description="Dynamic Margin Optimizer and Cart Recovery Engine", # <-- Y la descripción
+    title="Slancio",
+    description="Dynamic Margin Optimizer and Cart Recovery Engine",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -52,7 +52,7 @@ async def health_check():
 app.include_router(config.router, dependencies=[Depends(verify_jwt)])
 app.include_router(ingest.router, prefix="/webhook")
 app.include_router(process.router, prefix="/webhook")
-app.include_router(execute.router, prefix="/webhook") # <-- Enchufamos execute
+app.include_router(execute.router, prefix="/webhook")
 
 app.add_middleware(LimitUploadSize)
 app.add_middleware(
@@ -68,7 +68,6 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    # (El handler de validación queda exactamente igual)
     logger.error(f"Payload validation rejected: {exc.errors()}")
     return JSONResponse(
         status_code=422,
